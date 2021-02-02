@@ -1,0 +1,102 @@
+/*
+width
+100+430+110
+height 
+left 2px 溢れてる?(p5+day14+time31)
+main -0.5px (news_title27+news_summary20.5)
+
+animationがどの座標でpopするのかがわからん
+sass使いたい…
+    */
+html {
+    width: 640px;
+}
+
+body {
+    width: 640px;
+    height: 48px;
+    display: flex;
+    text-align: center;
+    background-color: black;
+    color: white;
+    overflow: hidden;
+}
+
+div {
+    /* outline: solid 1px white;
+    outline-offset: -1px; */
+    flex-shrink: 0;
+}
+
+
+#left {
+    font-family: 'Signika', sans-serif;
+    width: 100px;
+    height: 48px;
+    padding: 5px 5px 0 5px;
+    background: black;
+}
+
+#day {
+    display: block;
+    width: 90px;
+    line-height: 14px;
+    font-size: 18px;
+}
+
+#time {
+    display: flex;
+    justify-content: center;
+    width: 90px;
+    height: 31px;
+    font-size: 29px;
+    line-height: 33px;
+}
+
+#main {
+    width: 430px;
+    height: 48px;
+    font-family: 'Kosugi Maru', sans-serif;
+    z-index: -1;
+}
+
+#news_title {
+    text-align: left;
+    width: 430px;
+    height: 27px;
+    font-size: 165%;
+    white-space: nowrap;
+}
+
+.news_summary {
+    display: inline-block;
+    height: 16px;
+    font-size: 18px;
+    white-space: nowrap;
+
+    transform-origin: top right;
+
+    animation-duration: 50s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: reverse;
+    animation-play-state: unset;
+    animation-name: scrollAnime;
+}
+
+#right {
+    display: block;
+    width: 110px;
+    background-color: black;
+}
+
+@keyframes scrollAnime {
+
+    0% {
+        transform: translateX(-110%)
+    }
+
+    100% {
+        transform: translateX(calc(0% + 640px))
+    }
+}

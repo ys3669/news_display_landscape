@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=640,initial-scale=1.0">
+    <title>for majoca iris page</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Signika&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/destyle.css@2.0.2/destyle.min.css" rel="stylesheet">
+    <link href="./style.css" rel="stylesheet">
+    <script>
+        //ref:https://kokuda.org/portal/portal-hyper.html
+        let news_list;
+        let news_position = 0;
+
+        async function load_news() {
+            const url = "http://" + '192.168.0.111' + ":5000" + "/feeds/";
+            news_list = await fetch(url).then((r) => {
+                return r.json();
+            });
+
+            console.log(news_list);
+        };
+
+        function show_news(news) {
+            news_title.innerHTML = news.title;
+            news_summary.innerHTML = news.description;
+        }
+
+        async function news_updater() {
+            if (news_list.length <= news_position) {
+                news_position = 0;
+                await load_news();
+            }
+            show_news(news_list[news_position]);
+            console.log("animated", news_position, "/", news_list.length);
+            news_position++;
+        };
+
+
+        window.onload = async function () {
+            await load_news();
+            const animated = document.querySelector('.news_summary');
+
+            news_updater();
+            animated.addEventListener('animationiteration', () => {
+                news_updater();
+            });
+        } 
+    </script>
+
+</head>
+
+<body>
+    <div id=left>
+        <div id="day">
+            <p id="var_day"></p>
+        </div>
+        <div id="time">
+            <p id="var_hh"></p>
+            <p id="colon">:</p>
+            <p id=var_mm></p>
+        </div>
+    </div>
+    </div>
+    <div id="main">
+        <div id="news_title"></div>
+        <p><span id="news_summary" class="news_summary"></span></p>
+    </div>
+    <!--     <div id="right">
+        気温を出そうとした形跡
+    </div> -->
+    <script>
+        time();
+        setInterval('time()', 1000);
+
+        function time() {
+            var date = new Date();
+            hh = ('0' + date.getHours()).slice(-2)
+            mm = ('0' + date.getMinutes()).slice(-2)
+            ss = ('0' + date.getSeconds()).slice(-2)
+            var_day.innerHTML = date.toLocaleDateString("ja-JP", { year: 'numeric', month: 'numeric', day: 'numeric' });
+            var_hh.innerHTML = hh;
+            var_mm.innerHTML = mm;
+        }
+    </script>
+</body>
+
+</html>

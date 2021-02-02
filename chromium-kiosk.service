@@ -1,0 +1,11 @@
+[Unit]
+Description=launch chromium kiosk mode
+
+[Service]
+User=pi
+Environment=DISPLAY=:0
+ExecStart=chromium-browser --kiosk http://192.168.0.120:8080
+Type=simple
+
+[Install]
+WantedBy=default.target

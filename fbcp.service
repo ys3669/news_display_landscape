@@ -1,0 +1,9 @@
+[Unit]
+Description=fbcp
+
+[Service]
+ExecStart=/usr/local/bin/fbcp
+Type=simple
+
+[Install]
+WantedBy=default.target
