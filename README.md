@@ -2,7 +2,9 @@
 ---
 chromiumとfbcpに逃げた
 
-⭕️マジョカアイリス
+![image](https://i.imgur.com/KTKnEYG.jpg?2 "image")
+
+⭕️マジョカアイリス
 
 ❌マジョリカアイリス
 
